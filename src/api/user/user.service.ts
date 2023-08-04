@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@mikro-orm/nestjs';
 import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
 import { UserDTO } from '../../dtos/user.dto';
-import { User } from 'src/entities';
+import { Bookmark, User } from 'src/entities';
+import { BookmarkDTO } from 'src/dtos/bookmark.dto';
 
 
 @Injectable()
@@ -41,6 +42,11 @@ export class UserService {
         const user = this.em.getReference(User, id);
         await this.em.remove(user).flush();
         return `User with id ${id} is deleted permanently from database`;
-     }
+    }
+
+    async getAllBookmarksForUser(id :number) : Promise<BookmarkDTO[]>{
+        const bookmarks = this.em.find(Bookmark, {userId : id});
+        return bookmarks;
+    }
 
 }
