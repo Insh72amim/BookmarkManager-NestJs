@@ -6,22 +6,22 @@ import { BookmarkDTO } from 'src/dtos/bookmark.dto';
 export class BookmarkController {
     constructor(private bookmarkService : BookmarkService){}
 
-    @Post('create')
+    @Post()
     async createBookmark(@Body() bookmark : BookmarkDTO) : Promise<BookmarkDTO> {
         return await this.bookmarkService.createBookmark(bookmark);
     }
 
-    @Get('read/:id')
+    @Get(':id')
     async readBookmark(@Param('id') id : number) : Promise<BookmarkDTO> {
         return await this.bookmarkService.readBookmark(id);
     }
 
-    @Post('update/:id')
+    @Post(':id')
     async updateBookmark(@Param('id') id : number, @Body() bookmark : BookmarkDTO) : Promise<BookmarkDTO> {
         return await this.bookmarkService.updateBookmark(id, bookmark);
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     async deleteBookmark(@Param('id') id : number) : Promise<String>{
         return await this.bookmarkService.deleteBookmark(id);
     }

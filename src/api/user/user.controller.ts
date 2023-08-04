@@ -7,22 +7,22 @@ import { BookmarkDTO } from 'src/dtos/bookmark.dto';
 export class UserController {
     constructor(private userService : UserService){}
 
-    @Post('create')
+    @Post()
     async createUser(@Body() user : UserDTO) : Promise<UserDTO> {
         return await this.userService.createUser(user);
     }
 
-    @Get('read/:id')
+    @Get(':id')
     async readUser(@Param('id') id : number) : Promise<UserDTO>{
         return await this.userService.readUser(id);
     }
 
-    @Post('update/:id')
+    @Post(':id')
     async updateUser(@Param('id') id : number, @Body() user : UserDTO) : Promise<UserDTO>{
         return await this.userService.updateUser(id, user);
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     async deleteUser(@Param('id') id ) : Promise<String>{
         return await this.userService.deleteUser(id);
     }
