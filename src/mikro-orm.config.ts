@@ -1,10 +1,10 @@
 import { Logger } from '@nestjs/common';
 import { Options } from '@mikro-orm/core';
-import { User, Bookmark } from './entities';
+import { User, Bookmark, Tag } from './entities';
 
 const logger = new Logger('MikroORM');
 const config: Options = {
-  entities: [User, Bookmark],
+  entities: [User, Bookmark, Tag],
   dbName: 'BMS',
   type: 'postgresql',
   user : process.env.PG_USER,
