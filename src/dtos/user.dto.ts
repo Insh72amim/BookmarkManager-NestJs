@@ -1,7 +1,7 @@
 
 export interface UserDTO {
     id : number,
-    name? : String,
+    name : String,
     email : String,
     password : String,
 }
