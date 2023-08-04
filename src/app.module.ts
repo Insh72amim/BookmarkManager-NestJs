@@ -7,9 +7,10 @@ import { UserController } from './api/user/user.controller';
 import { UserService } from './api/user/user.service';
 import { UserModule } from './api/user/user.module';
 import { OrmModule } from './orm/orm.module';
+import { BookmarkModule } from './api/bookmark/bookmark.module';
 
 @Module({
-  imports: [UserModule, OrmModule],
+  imports: [ OrmModule, UserModule, BookmarkModule],
   controllers: [ ],
   providers: [],
 })

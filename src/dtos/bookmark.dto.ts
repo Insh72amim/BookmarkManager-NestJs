@@ -1,7 +1,7 @@
 export interface BookmarkDTO {
     id : number,
-    userid : String,
+    userId : number,
     name : String,
-    description : String,
     link : String,
+    description : String,
 }

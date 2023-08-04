@@ -1,19 +1,28 @@
 import { Entity, Property } from "@mikro-orm/core";
 import { BaseEntity } from "./Base";
+import { BookmarkDTO } from "src/dtos/bookmark.dto";
 
 @Entity()
 export class Bookmark extends BaseEntity{
 
     @Property()
-    UserId!: number;
+    userId: number;
 
     @Property()
     name : String;
 
     @Property()
-    description : String;
+    link : String;
 
     @Property()
-    link : String;
+    description : String;
+
+    constructor(bookmark : BookmarkDTO) {
+        super();
+        this.userId  = bookmark.userId;
+        this.name = bookmark.name;
+        this.link = bookmark.link;
+        this.description = bookmark.description;
+      }
 
 }
