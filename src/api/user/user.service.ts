@@ -19,7 +19,7 @@ export class UserService {
     async createUser(user : UserDTO) : Promise<UserDTO>{
         const newUser = new User(user);
         await this.em.persistAndFlush(newUser);
-        return user;
+        return newUser;
     }
 
     async readUser(id : number) : Promise<UserDTO>{
@@ -32,7 +32,7 @@ export class UserService {
         oldUser.email = user.email;
         oldUser.password = user.password;
         await this.em.flush();
-        return user;
+        return oldUser;
     }
 
     async deleteUser(id : number) : Promise<String>{
@@ -50,7 +50,7 @@ export class UserService {
         const newTag = new Tag(tag);
         newTag.userId = id;
         await this.em.persistAndFlush(newTag);
-        return tag;
+        return newTag;
     }
 
     async readAllTagsForUser(id : number) : Promise<TagDTO[]>{
