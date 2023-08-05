@@ -8,6 +8,9 @@ export class Tag extends BaseEntity{
     @Property()
     name : String;
 
+    @Property()
+    userId : number;
+
     constructor(tag : TagDTO) {
         super();
         this.name  = tag.name;

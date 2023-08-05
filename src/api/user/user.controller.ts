@@ -1,7 +1,6 @@
 import { Post, Controller, Body, Param, Get, Delete } from '@nestjs/common';
-import { UserDTO } from '../../dtos/user.dto';
 import { UserService } from './user.service';
-import { BookmarkDTO } from 'src/dtos/bookmark.dto';
+import { UserDTO, BookmarkDTO, TagDTO} from '../../dtos';
 
 @Controller('user')
 export class UserController {
@@ -30,6 +29,16 @@ export class UserController {
     @Get(':id/bookmarks')
     async getAllBookmarksForUser(@Param('id') id : number): Promise<BookmarkDTO[]>{
         return await this.userService.getAllBookmarksForUser(id);
+    }
+
+    @Post(':id/tag')
+    async createTagForUser(@Body() tag : TagDTO, @Param('id') id : number) : Promise<TagDTO> {
+        return await this.userService.createTagForUser(tag, id);
+    }
+
+    @Get(':id/tags')
+    async readAllTagsForUser(@Param() id : number) : Promise<TagDTO[]> {
+        return await this.userService.readAllTagsForUser(id);
     }
 
 }

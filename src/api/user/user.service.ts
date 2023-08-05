@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectEntityManager, InjectRepository } from '@mikro-orm/nestjs';
-import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
-import { UserDTO } from '../../dtos/user.dto';
-import { Bookmark, User } from 'src/entities';
-import { BookmarkDTO } from 'src/dtos/bookmark.dto';
-
+import { EntityManager } from '@mikro-orm/postgresql';
+import { UserDTO, BookmarkDTO, TagDTO} from '../../dtos';
+import { Bookmark, Tag, User } from 'src/entities';
 
 @Injectable()
 export class UserService {
@@ -47,6 +44,17 @@ export class UserService {
     async getAllBookmarksForUser(id :number) : Promise<BookmarkDTO[]>{
         const bookmarks = this.em.find(Bookmark, {userId : id});
         return bookmarks;
+    }
+
+    async createTagForUser(tag : TagDTO, id : number) : Promise<TagDTO>{
+        const newTag = new Tag(tag);
+        newTag.userId = id;
+        await this.em.persistAndFlush(newTag);
+        return tag;
+    }
+
+    async readAllTagsForUser(id : number) : Promise<TagDTO[]>{
+        return await this.em.find(Tag, {userId : id});
     }
 
 }

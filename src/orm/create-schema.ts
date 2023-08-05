@@ -1,9 +1,9 @@
 import { MikroORM } from '@mikro-orm/core';
-import { Bookmark, User } from 'src/entities';
+import { Bookmark, Tag, User } from 'src/entities';
 
 (async () => {
   const orm = await MikroORM.init({
-    entities: [User, Bookmark],
+    entities: [User, Bookmark, Tag],
     dbName: 'BMS',
     type: 'postgresql',
     user : process.env.PG_USER,
