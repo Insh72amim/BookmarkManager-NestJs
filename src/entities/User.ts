@@ -1,4 +1,4 @@
-import { Entity, Property } from "@mikro-orm/core";
+import { Entity, Property, Unique } from "@mikro-orm/core";
 import { BaseEntity } from "./Base";
 import { Hash } from "crypto";
 import { UserDTO } from "src/dtos/user.dto";
@@ -10,6 +10,7 @@ export class User extends BaseEntity{
     name : String;
 
     @Property()
+    @Unique()
     email : String;
 
     @Property()

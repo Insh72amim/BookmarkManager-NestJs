@@ -1,8 +1,15 @@
-import { Post, Controller, Body, Param, Get, Delete } from '@nestjs/common';
+import { Post, Controller, Body, Param, Get, Delete, UseGuards, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDTO, BookmarkDTO, TagDTO} from '../../dtos';
+import { AuthGuard } from '@nestjs/passport';
+import { Strategy } from 'passport-jwt';
+import { Request } from 'express';
+import { JwtGuard } from '../auth/guards';
+import { Payload } from '../auth/decorator/payloadReq';
+import { payloadDTO } from 'src/dtos/payload';
 
 @Controller('user')
+@UseGuards(JwtGuard)
 export class UserController {
     constructor(private userService : UserService){}
 
@@ -12,7 +19,7 @@ export class UserController {
     }
 
     @Get(':id')
-    async readUser(@Param('id') id : number) : Promise<UserDTO>{
+    async readUser(@Param('id') id : number, @Payload() Payload : payloadDTO) : Promise<UserDTO>{
         return await this.userService.readUser(id);
     }
 

@@ -4,4 +4,5 @@ export interface UserDTO {
     name : String,
     email : String,
     password : String,
+    access_token? :String,
 }
